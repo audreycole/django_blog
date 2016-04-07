@@ -12,7 +12,7 @@
     <!-- Bootstrap -->
     <!--<link href="/templates/my_blog/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-	  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -25,37 +25,33 @@
   <body>
     
     <div class="container">
-	    <nav class="navbar navbar-inverse">
-	      <ul class="nav nav-pills">
-	        <li role="presentation" class="active"><a href="/login">Login</a></li>
-	        <li role="presentation"><a href="/register">Register</a></li>
-	      </ul>
-	    </nav>
+      <nav class="navbar navbar-inverse">
+        <ul class="nav nav-pills">
+          <li role="presentation" class="active"><a href="/">Home</a></li>
+          <li role="presentation"><a href="/register">Register</a></li>
+        </ul>
+      </nav>
     
-	    <h1>Audrey's Blog</h1>
-	    <p>Welcome to the blog!</p> 
+      <h1>Audrey's Blog</h1>
+      <p>Welcome to the blog!</p> 
 
       <hr>
 
-      {% for post in posts %}
-          <div>
-              <p>published: {{ post.published_date }}</p>
-              <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-              <p>{{ post.text|linebreaks }}</p>
-          </div>
-      {% endfor %}
-      <h3> Add a Post: </h3>
-      <form action="{% url 'post_create' %}" method="post">{% csrf_token %}
-        <fieldset class="form-group">
-          <label for="exampleInputEmail1">Title</label>
-          <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Enter title">
-        </fieldset>
-        <fieldset class="form-group">
-          <label for="exampleInputPassword1">Text</label>
-          <textarea name="text" class="form-control" id="exampleInputPassword1" placeholder="Once upon a time..." rows="10"></textarea>
-        </fieldset>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form> 
+      <h1>Login</h1>
+        
+      <form method="POST" action="/login/auth" > {% csrf_token %}
+      <fieldset class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+        <small class="text-muted">We'll never share your email with anyone else.</small>
+      </fieldset>
+      <fieldset class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
 
       <br>
       
