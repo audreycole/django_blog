@@ -38,9 +38,6 @@ def post_create(request):
 def login(request):
     return render(request, 'my_blog/login.html')
 
-def register(request):
-	return render(request, 'my_blog/register.html')
-
 def login_auth(request):
 	email = request.POST.get('email')
 	password = request.POST.get('password')
@@ -54,6 +51,21 @@ def login_auth(request):
 			return redirect('/login')
 	else:
 		return redirect('/login')
+
+def register(request):
+	return render(request, 'my_blog/register.html')
+
+def register_auth(request):
+	name = request.POST.get('name')
+	email = request.POST.get('email')
+	password = request.POST.get('password')
+
+	# Create a new user
+	user = User.objects.create(name=name, email=email, password=password)
+	user.save()
+
+	return redirect('/', request)
+
 
 def logout(request):
 	request.session['username'] = ''
