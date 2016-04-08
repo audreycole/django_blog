@@ -15,5 +15,7 @@ urlpatterns = [
     url(r'^post/create/$', views.post_create, name='post_create'),
     url(r'^login/$', views.login, name='login'),
     url(r'^register/$', views.register, name='register'),
-    
+    url(r'^login/auth/$', views.login_auth, name='login_auth'),
+    url(r'^logout/$', views.logout, name='logout'),
+    #url(r'^register/auth/$', views.register_auth, name='register_auth'),
 ]

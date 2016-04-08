@@ -1,17 +1,23 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from django.utils import timezone
 
 from .models import Post # From current directory /models.py import Post model
 
-from django.contrib.auth.models import User
+from .models import User
+
+#from django.contrib.auth.models import User
 
 # Create your views here.
 
 def post_list(request):
 	# We want published blog posts sorted by published_date
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'my_blog/post_list.html', {'posts': posts})
+    username = request.session['username']
+    if(username):
+    	return render(request, 'my_blog/post_list.html', {'posts': posts, 'username': username})
+    else:
+    	return render(request, 'my_blog/post_list.html', {'posts': posts, 'username': ''})
 
 def post_detail(request, pk):
     # post = Post.objects.get(pk=pk)
@@ -34,4 +40,23 @@ def login(request):
 
 def register(request):
 	return render(request, 'my_blog/register.html')
+
+def login_auth(request):
+	email = request.POST.get('email')
+	password = request.POST.get('password')
+	user = User.objects.get(email=email)
+	if(user):
+		if(user.password == password):
+			request.session['username'] = user.name
+			request.session['email'] = user.email
+			return redirect('/', request)
+		else: 
+			return redirect('/login')
+	else:
+		return redirect('/login')
+
+def logout(request):
+	request.session['username'] = ''
+	return redirect('/', request)
+
 

@@ -27,14 +27,22 @@
     <div class="container">
 	    <nav class="navbar navbar-inverse">
 	      <ul class="nav nav-pills">
+        {% if username == '' %}
 	        <li role="presentation" class="active"><a href="/login">Login</a></li>
 	        <li role="presentation"><a href="/register">Register</a></li>
+        {% else %}
+          <li role="presentation" class="active"><a href="/logout">Logout</a></li>
+          <li role="presentation"><a href="/register">Register</a></li>
+        {% endif %}
 	      </ul>
 	    </nav>
     
-	    <h1>Audrey's Blog</h1>
-	    <p>Welcome to the blog!</p> 
-
+	    <h1>The Blog</h1>
+      {% if username == '' %}
+      <p>Welcome to the blog!</p> 
+      {% else %}
+	    <p>Welcome to the blog, {{ username }} !</p> 
+      {% endif %}
       <hr>
 
       {% for post in posts %}

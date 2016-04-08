@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Audrey's Blog</title>
+    <title>The Blog</title>
 
     <!-- Bootstrap -->
     <!--<link href="/templates/my_blog/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -32,14 +32,14 @@
         </ul>
       </nav>
     
-      <h1>Audrey's Blog</h1>
+      <h1>The Blog</h1>
       <p>Welcome to the blog!</p> 
 
       <hr>
 
       <h1>Login</h1>
         
-      <form method="POST" action="/login/auth" > {% csrf_token %}
+      <form method="POST" action="/login/auth/" > {% csrf_token %}
       <fieldset class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
